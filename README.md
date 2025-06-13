@@ -6,6 +6,10 @@ A modern, intelligent document analysis system that enables users to upload PDF 
 
 This project implements a **Retrieval-Augmented Generation (RAG)** system that combines document processing, vector similarity search, and large language models to provide accurate, source-attributed answers to questions about PDF documents.
 
+## Screenshot
+
+![Screenshot](assets/structure.png)
+
 ## ✨ Features
 
 - 📄 **PDF Document Processing** - Upload and process multiple PDF files
