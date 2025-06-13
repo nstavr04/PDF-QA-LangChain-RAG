@@ -86,18 +86,18 @@ def process_uploaded_files(uploaded_files, chunk_size=1000, chunk_overlap=200):
     
     # Process each uploaded file
     for uploaded_file in uploaded_files:
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
-            tmp_file.write(uploaded_file.getvalue())
-            tmp_file_path = tmp_file.name
         
         try:
             # Load document from PDF
-            document = loader.load_pdf(tmp_file_path, uploaded_file.name)
+            pdf_bytes = uploaded_file.getvalue()
+            document = loader.load_from_pdf_bytes(pdf_bytes, uploaded_file.name)
+            
             if document:
                 all_documents.append(document)
-        finally:
-            # Clean up temporary file
-            os.unlink(tmp_file_path)
+
+        except Exception as e:
+            st.error(f"Error processing {uploaded_file.name}: {e}")
+            continue  # Skip this file, continue with others
     
     if not all_documents:
         return None, "No valid documents found"
@@ -137,7 +137,7 @@ def main():
         # Model selection
         model_options = {
             "llama-3.3-70b-versatile": "Llama 3.3 70B (Recommended)",
-            "mistral-saba-24b": "Mistral saba 24B (Alternative)"
+            "llama-3.1-8b-instant": "llama-3.1-8b-instant (Fastest)"
         }
         
         selected_model = st.selectbox(
@@ -147,6 +147,23 @@ def main():
             help="Choose the AI model for generating answers"
         )
         
+        # Handle model changes
+        if 'current_model' not in st.session_state:
+            st.session_state.current_model = selected_model
+
+        if st.session_state.current_model != selected_model:
+            # Model changed - reset query processor to force recreation
+            st.session_state.query_processor = None
+            st.session_state.current_model = selected_model
+            
+            # Show user feedback
+            model_name = model_options[selected_model]
+            st.info(f"🔄 Switched to {model_name}")
+            
+            # If documents are already processed, the query processor will be recreated automatically
+            if st.session_state.documents_processed:
+                st.info("Next question will use the new model")
+
         # Document processing settings
         st.subheader("📄 Document Settings")
         chunk_size = st.slider("Chunk Size", 500, 2000, 1000, 100, 
@@ -169,6 +186,11 @@ def main():
         if st.button("🔄 Process Documents", type="primary"):
             if uploaded_files:
                 with st.spinner("Processing uploaded documents..."):
+                    st.session_state.vector_store = None
+                    st.session_state.query_processor = None
+                    st.session_state.documents_processed = False
+                    st.session_state.messages = [] 
+                            
                     vector_store, message = process_uploaded_files(
                         uploaded_files, chunk_size, chunk_overlap
                     )
