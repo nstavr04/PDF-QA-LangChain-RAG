@@ -8,7 +8,7 @@ This project implements a **Retrieval-Augmented Generation (RAG)** system that c
 
 ## Screenshot
 
-![Screenshot](assets/structure.png)
+![Screenshot](assets/screenshot.png)
 
 ## ✨ Features
 
