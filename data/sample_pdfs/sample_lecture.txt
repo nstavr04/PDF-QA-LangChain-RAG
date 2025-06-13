@@ -1,0 +1,16 @@
+# Introduction to Neural Networks
+
+Neural networks are computational models inspired by biological neural networks. They consist of interconnected nodes (neurons) that process information.
+
+## Basic Structure
+- Input Layer: Receives data
+- Hidden Layers: Process information  
+- Output Layer: Produces results
+
+## Learning Process
+Neural networks learn through backpropagation, adjusting weights to minimize error.
+
+## Applications
+- Image recognition
+- Natural language processing
+- Predictive modeling
