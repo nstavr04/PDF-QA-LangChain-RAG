@@ -82,6 +82,7 @@ This project implements a **Retrieval-Augmented Generation (RAG)** system that c
 
 ## 📂 Project Structure
 
+```
 PDF-QA-LangChain-RAG/
 ├── src/
 │   ├── app.py                 # Streamlit web application
@@ -94,7 +95,8 @@ PDF-QA-LangChain-RAG/
 │   └── vector_store/         # Saved vector databases
 ├── config.py
 ├── requirements.txt
-└── README.md          
+└── README.md
+```        
 
 ## 🔧 Configuration
 
