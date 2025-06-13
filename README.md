@@ -1,5 +1,7 @@
 # 📚 PDF Q&A System with RAG Architecture
 
+**This is a work in progress, expect bugs but the basic functionality is there**
+
 A modern, intelligent document analysis system that enables users to upload PDF documents and ask questions about their content using advanced AI techniques.
 
 ## 🎯 Overview
