@@ -56,7 +56,6 @@ This project implements a **Retrieval-Augmented Generation (RAG)** system that c
    pip install -r requirements.txt
 
 3. **Set up API key**
-    # Create config.py and add your Groq API key
     echo "GROQ_API_KEY = 'your-api-key-here'" > config.py
 
 4. **Run the application**
