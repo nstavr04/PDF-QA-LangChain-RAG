@@ -108,7 +108,7 @@ PDF-QA-LangChain-RAG/
 
 **Model Options**
 - `llama-3.3-70b-versatile` (Recommended) – High quality responses
-- `mixtral-saba-24b` – Alternative option
+- `llama-3.1-8b-instant` – Fastest option
 
 **Processing Parameters**
 - **Chunk Size:** 500–2000 characters (default: 1000)
